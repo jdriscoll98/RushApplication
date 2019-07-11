@@ -39,7 +39,6 @@
         td:nth-of-type(1):before { content: "Name: "; }
 td:nth-of-type(2):before { content: "Grade: "; }
 td:nth-of-type(3):before { content: "Phone Number: "; }
-td:nth-of-type(5):before { content: "Comments: "; }
 
 }
 </style>
@@ -62,12 +61,16 @@ td:nth-of-type(5):before { content: "Comments: "; }
                         <td>{{ rushee.name }}</td>
                         <td>{{ rushee.grade }}</td>
                         <td>{{ rushee.phone_number }}</td>
-                        <td>{{ rushee.comments }}
+                        {% for comment in comments %}
+                        <td>{{ comment.comment }} - {{ comment.brother }}</td>
+                        {% empty %}
+                        <td> no comments </td>
+                        {% endfor %}
                     </tr>
                 </tbody>
             </table>
             <a href="{% url 'website:change_status' pk=rushee.pk %}"class="btn btn-primary" class="btn btn-primary">Change Status</a>
-            <a href="" class="btn btn-primary">Add Comment</a>
+            <a href="{% url 'website:add_comment' pk=rushee.pk %}" class="btn btn-primary">Add Comment</a>
 
         </div>
 

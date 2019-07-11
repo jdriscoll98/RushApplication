@@ -18,7 +18,7 @@
                 <tbody>
                     {% for rushee in rushees %}
                     <tr>
-                        <td>{{ rushee.name }}</td>
+                        <td><a href="{% url 'website:rushee_detail' pk=rushee.pk %}">{{ rushee.name }}</a></td>
                         <td>{{ rushee.currently_talking_to|default:"No room" }}</td>
                     </tr>
                     {% endfor %}

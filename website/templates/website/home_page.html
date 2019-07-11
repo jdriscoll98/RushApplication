@@ -12,14 +12,18 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Score</th>
+                        <th colspan="2">Score</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for rushee in rushees %}
                     <tr>
                         <td><a href="{% url 'website:rushee_detail' pk=rushee.pk %}">{{ rushee.name }}</a></td>
-                        <td>{{ rushee.total_score }}<button class="fa fa-arrow-up"></button><button class="fa fa-arrow-down"></button></td>
+                        <td>{{ rushee.total_score }}</td>
+                        <td>
+                          <a class="btn btn-primary" href="{% url 'website:change_score' pk=rushee.pk %}">Vote</a>
+                        </td>
+                          <!-- <button class="fa fa-arrow-up"></button><button class="fa fa-arrow-down"></button></td> -->
                     </tr>
                     {% endfor %}
                 </tbody>
