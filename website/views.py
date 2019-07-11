@@ -54,7 +54,7 @@ class UpdateRusheeStatus(UpdateView):
     model = Rushee
     fields = ['status']
     template_name = 'website/change_status.html'
-    success_url = reverse_lazy("webiste:home_page")
+    success_url = reverse_lazy("website:home_page")
 
 class UpdateRusheeScore(UpdateView):
     model = Rushee
