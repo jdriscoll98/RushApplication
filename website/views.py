@@ -54,13 +54,15 @@ class UpdateRusheeStatus(UpdateView):
     model = Rushee
     fields = ['status']
     template_name = 'website/change_status.html'
-    success_url = reverse_lazy("webiste:home_page")
+    success_url = reverse_lazy("website:home_page")
+
 
 class UpdateRusheeScore(UpdateView):
     model = Rushee
     fields = ['total_score']
     template_name = 'website/change_status.html'
     success_url = reverse_lazy("website:home_page")
+
 
 class DeleteRushee(DeleteView):
     model = Rushee
@@ -75,6 +77,7 @@ class ViewRushee(DetailView):
         rushee = Rushee.objects.get(pk=self.kwargs.get('pk'))
         context['comments'] = Comment.objects.filter(rushee=rushee)
         return context
+
 
 class AddComment(CreateView):
     model = Comment

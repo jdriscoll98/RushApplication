@@ -3,6 +3,7 @@ from django.urls import reverse
 
 # This will contain all the information about the rushee  #
 
+
 class Rushee(models.Model):
     GRADES = [
         ("FRESHMAN", "FR"),
@@ -27,6 +28,7 @@ class Rushee(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Comment(models.Model):
     brother = models.CharField(max_length=100)
