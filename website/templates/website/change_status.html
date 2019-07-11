@@ -1,0 +1,23 @@
+{% extends 'website/base.html' %}
+
+{% block title %}{{ block.super }} | Home Page {% endblock title %}
+
+{% block contents %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1>{{ rushee.name }}
+            <table class="table table-striped table-bordered">
+                <form>
+                    {{ form.as_table }}
+                </form>
+            </table>
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock contents %}

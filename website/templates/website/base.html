@@ -7,26 +7,50 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>{% block title %}Django Template Project{% endblock title %}</title>
+    <title>{% block title %}Rushee Central{% endblock title %}</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
 		<!-- CSS -->
 		<link rel="stylesheet" href="{% static 'website/css/style.css' %}"/>
+        {% block custom_css %}
+    <link src="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" type="text/css"></link>
+    {% endblock custom_css %}
 
 		<!-- Favicon -->
 		<link rel="icon" href="{% static 'website/images/favicon.ico' %}?v=2">
 
 		{% block head_js %}{% endblock head_js %}
 
+
   </head>
   <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Rushee Central</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'website:home_page' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'website:second_round' %}">Upstairs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'website:bid_status' %}">Bids</a>
+      </li>
+  </div>
+</nav>
 
 		<main role="main" class="container">
 
 		  <div class="starter-template">
-		    <h1>Rush Application</h1>
+		    <h1>{% block header %}{% endblock header %}</h1>
 				<div class="contents">
 
           <!-- Black Contents -->

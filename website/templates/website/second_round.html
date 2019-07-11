@@ -1,25 +1,25 @@
 {% extends 'website/base.html' %}
 
-{% block title %}{{ block.super }} | Home Page {% endblock title %}
-{% block header  %} Main Floor {% endblock header %}
+{% block title %}{{ block.super }} | Upstairs {% endblock title %}
+{% block header  %} Upstairs {% endblock header %}
 
 {% block contents %}
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col-md-8 offset-md-2">
             <table class="table">
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Score</th>
+                        <th>Room Number</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for rushee in rushees %}
                     <tr>
-                        <td><a href="{% url 'website:rushee_detail' pk=rushee.pk %}">{{ rushee.name }}</a></td>
-                        <td>{{ rushee.total_score }}<button class="fa fa-arrow-up"></button><button class="fa fa-arrow-down"></button></td>
+                        <td>{{ rushee.name }}</td>
+                        <td>{{ rushee.currently_talking_to|default:"No room" }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

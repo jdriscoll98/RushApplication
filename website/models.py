@@ -11,17 +11,19 @@ class Rushee(models.Model):
         ]
 
     STATUS = [
-        ("FIRST", "1"),
-        ("SECOND", "2"),
-        ("BID_ROOM", "BID"),
-        ("ACCEPTED", "A"),
-        ("HOLDING", "H"),
-        ("DENIED", "D"),
+        ("FIRST", "Main Floor"),
+        ("SECOND", "Upstairs"),
+        ("ACCEPTED", "Accepted"),
+        ("HOLDING", "Holding"),
+        ("DENIED", "Denied"),
     ]
     name = models.CharField(max_length=100, unique=True)
-    email = models.EmailField(blank=True, null=True)
-    grade = models.CharField(max_length=2, choices=GRADES)
-    phone_number = models.IntegerField(default=0)
-    brothers_known = models.CharField(max_length=300, blank=True, null=True)
+    grade = models.CharField(max_length=100, choices=GRADES)
+    phone_number = models.IntegerField()
+    currently_talking_to = models.CharField(max_length=100, blank=True, null=True)
+    comments = models.TextField(max_length=500, blank=True, null=True)
     total_score = models.IntegerField(default=0)
     status = models.CharField(max_length=10, choices=STATUS)
+
+    def __str__(self):
+        return self.name

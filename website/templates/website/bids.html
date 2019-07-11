@@ -1,0 +1,50 @@
+{% extends 'website/base.html' %}
+
+{% block title %}{{ block.super }} | Bid Status {% endblock title %}
+{% block header  %} Bid Status {% endblock header %}
+
+{% block contents %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th colspan="4">Accepted</th>
+                    </tr>
+                    {% for rushee in accepted %}
+                    <tr>
+                        <td>{{ rushee.name }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan="4">Holding</th>
+                    </tr>
+                    {% for rushee in holding %}
+                    <tr>
+                        <td>{{ rushee.name }}</td>
+                    </tr>
+                    {% endfor %} <tr>
+                         <th colspan="4">Rejected</th>
+                     </tr>
+                     {% for rushee in denied %}
+                     <tr>
+                         <td>{{ rushee.name }}</td>
+                     </tr>
+                     {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock contents %}
