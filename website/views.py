@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 from django.shortcuts import HttpResponseRedirect
@@ -44,10 +45,12 @@ class BidView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class CreateRushee(CreateView):
+class CreateRushee(SuccessMessageMixin, CreateView):
     template_name = 'website/sign_up.html'
     model = Rushee
     fields = ['name', 'phone_number', 'grade']
+    success_url = reverse_lazy('website:register')
+    success_message = 'Thank you for registering!'
 
 
 class UpdateRusheeStatus(UpdateView):
