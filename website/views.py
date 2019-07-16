@@ -105,13 +105,14 @@ class Vote(View):
                 'success': False
             }
             try:
+                print(self.request.POST)
                 rushee = Rushee.objects.get(pk=self.request.POST.get('pk'))
-                vote = self.request.POST.get('vote')
+                vote = int(self.request.POST.get('vote'))
                 rushee.total_score += vote
                 rushee.save()
                 data['success'] = True
-                print('Here')
                 data['score'] = rushee.total_score
             except Exception as e:
+                print(e)
                 messages.error(self.request, 'Unable to vote on rushee at this time')
             return JsonResponse(data)
