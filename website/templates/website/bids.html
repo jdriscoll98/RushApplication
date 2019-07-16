@@ -21,7 +21,7 @@
                     </tr>
                     {% for rushee in accepted %}
                     <tr>
-                        <td>{{ rushee.name }}</td>
+                        <td><a href="{% url 'website:rushee_detail' pk=rushee.pk %}">{{ rushee.name }}</a></td>
                     </tr>
                     {% endfor %}
                     <tr>

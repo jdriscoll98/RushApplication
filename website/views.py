@@ -5,6 +5,9 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 from django.shortcuts import HttpResponseRedirect
+from django.http import JsonResponse
+from django.views.generic import View
+from django.contrib import messages
 
 from .models import Rushee, Comment
 
@@ -93,3 +96,22 @@ class AddComment(CreateView):
         self.object.rushee = rushee
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
+
+
+class Vote(View):
+    def post(self, *args, **kwargs):
+        if self.request.is_ajax:
+            data = {
+                'success': False
+            }
+            try:
+                rushee = Rushee.objects.get(pk=self.request.POST.get('pk'))
+                vote = self.request.POST.get('vote')
+                rushee.total_score += vote
+                rushee.save()
+                data['success'] = True
+                print('Here')
+                data['score'] = rushee.total_score
+            except Exception as e:
+                messages.error(self.request, 'Unable to vote on rushee at this time')
+            return JsonResponse(data)

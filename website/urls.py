@@ -17,4 +17,5 @@ urlpatterns = [
     url(r"^rushee/(?P<pk>\d+)/$", ViewRushee.as_view(), name="rushee_detail"),
     url(r"^change-score/(?P<pk>\d+)/$", UpdateRusheeScore.as_view(), name="change_score"),
     url(r"^add-comment/(?P<pk>\d+)/$", AddComment.as_view(), name="add_comment"),
+    url(r"^vote/$", Vote.as_view(), name="vote"),
 ]

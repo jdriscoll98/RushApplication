@@ -19,11 +19,18 @@
                     {% for rushee in rushees %}
                     <tr>
                         <td><a href="{% url 'website:rushee_detail' pk=rushee.pk %}">{{ rushee.name }}</a></td>
+<<<<<<< HEAD
                         <td>{{ rushee.total_score }}</td>
                         <td>
                           <!-- <a class="btn btn-primary" href="{% url 'website:change_score' pk=rushee.pk %}">Vote</a>
                         </td> -->
                           <button class="fa fa-arrow-up"></button><button class="fa fa-arrow-down"></button></td>
+=======
+                        <td id='score'>{{ rushee.total_score }}</td>
+                          <td>
+
+                        <button class="fa fa-arrow-up vote" value='1' id='{{ rushee.pk }}'></button><button class="fa fa-arrow-down vote" value='-1' id='{{ rushee.pk }}'></button></td>
+>>>>>>> 7e74b261a686c7b222ed521b6137cb7388b6950f
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -36,3 +43,36 @@
 </div>
 
 {% endblock contents %}
+
+{% block js %}
+
+<script>
+
+$('.vote').on('click', function() {
+  let pk = $(this).id
+  let vote = $(this).value
+  $.ajax({
+    url: '{% url "website:vote" %}',
+    type: 'POST',
+    data: {
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+      vote: vote,
+      pk: pk
+    },
+    dataType: 'json',
+    traditional: 'True',
+    success: function(data) {
+      if (data.success){
+      document.getElementById('score').innerHTML = data['score'];
+    }
+    else {
+      location.reload();
+    }
+    }
+  });
+});
+
+
+</script>
+
+{% endblock js %}
