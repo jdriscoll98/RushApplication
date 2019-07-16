@@ -5,6 +5,9 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 from django.shortcuts import HttpResponseRedirect
+from django.http import JsonResponse
+from django.views.generic import View
+from django.contrib import messages
 
 from .models import Rushee, Comment
 
@@ -58,10 +61,7 @@ class UpdateRusheeStatus(UpdateView):
     fields = ['status']
     template_name = 'website/change_status.html'
     success_url = reverse_lazy("website:home_page")
-<<<<<<< HEAD
-=======
 
->>>>>>> 7fe98e944fcbcf90731510f786c558792e350bb8
 
 class UpdateRusheeScore(UpdateView):
     model = Rushee
@@ -96,3 +96,22 @@ class AddComment(CreateView):
         self.object.rushee = rushee
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
+
+
+class Vote(View):
+    def post(self, *args, **kwargs):
+        if self.request.is_ajax:
+            data = {
+                'success': False
+            }
+            try:
+                rushee = Rushee.objects.get(pk=self.request.POST.get('pk'))
+                vote = self.request.POST.get('vote')
+                rushee.total_score += vote
+                rushee.save()
+                data['success'] = True
+                print('Here')
+                data['score'] = rushee.total_score
+            except Exception as e:
+                messages.error(self.request, 'Unable to vote on rushee at this time')
+            return JsonResponse(data)
