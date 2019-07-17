@@ -26,7 +26,7 @@ class HomePageView(TemplateView):
         return context
 
 
-class SecondRoundView(LoginRequiredMixin, TemplateView):
+class SecondRoundView(TemplateView):
     template_name = 'website/second_round.html'
 
     def get_context_data(self, *args, **kwargs):
@@ -36,7 +36,7 @@ class SecondRoundView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class BidView(LoginRequiredMixin, TemplateView):
+class BidView(TemplateView):
     template_name = 'website/bids.html'
 
     def get_context_data(self, *args, **kwargs):
@@ -105,7 +105,6 @@ class Vote(View):
                 'success': False
             }
             try:
-                print(self.request.POST)
                 rushee = Rushee.objects.get(pk=self.request.POST.get('pk'))
                 vote = int(self.request.POST.get('vote'))
                 rushee.total_score += vote
@@ -113,6 +112,5 @@ class Vote(View):
                 data['success'] = True
                 data['score'] = rushee.total_score
             except Exception as e:
-                print(e)
                 messages.error(self.request, 'Unable to vote on rushee at this time')
             return JsonResponse(data)

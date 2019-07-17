@@ -4,6 +4,7 @@ body {
 	text-align: center;
 	font-family: sans-serif;
 	width: 100%;
+    background-color: #800080
 }
 /*
 Generic Styling, for Desktops/Laptops
@@ -13,11 +14,7 @@ table {
   border-collapse: collapse;
   overflow: hidden;
 }
-/* Zebra striping */
-tr:nth-of-type(odd) {
-  background: #eee;
-}
-th {
+/* th {
   background: #333;
   color: white;
   font-weight: bold;
@@ -26,7 +23,59 @@ td, th {
   padding: 6px;
   border: 1px solid #ccc;
   text-align: left;
+} */
+.header {
+    color: #FFFF00;
+    margin: auto;
+    padding-bottom: 25px;
+}
+.btn-primary {
+    background-color: #FFFF00;
+    color: #800080
+}
+h2 {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin:0px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
 }
 
+.inner {
+    padding: 25px;
+    margin:0px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+li {
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+}
+
+input {
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #f4f5f6;
+    width: 100%;
+}
+
+.btn-primary {
+    font-size: 20px;
+    width: 100%;
+}
+.sign-up {
+  border-radius: 25px;
+  border: 2px solid black;
+  background-color: white;
+  padding: 20px;
+  width: 75%;
+}
 
 /* ----------- */

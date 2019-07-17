@@ -5,7 +5,11 @@
 
 {% block contents %}
 
+{% include 'website/nav_bar.html' %}
+
 <div class="container-fluid">
+    <br />
+    <h1>Main Floor</h1>
     <div class="row">
         <div class="col">
             <table class="table">
@@ -19,7 +23,7 @@
                     {% for rushee in rushees %}
                     <tr>
                         <td><a href="{% url 'website:rushee_detail' pk=rushee.pk %}">{{ rushee.name }}</a></td>
-                        <td id='score'>{{ rushee.total_score }}</td>
+                        <td id='score-{{ rushee.pk }}'>{{ rushee.total_score }}</td>
                           <td>
 
                         <button class="fa fa-arrow-up vote" value='1' id='{{ rushee.pk }}'></button><button class="fa fa-arrow-down vote" value='-1' id='{{ rushee.pk }}'></button></td>
@@ -55,7 +59,8 @@ $('.vote').on('click', function() {
     traditional: 'True',
     success: function(data) {
       if (data.success){
-      document.getElementById('score').innerHTML = data['score'];
+          let id = 'score-'  + pk
+      document.getElementById(id).innerHTML = data['score'];
     }
     else {
       // location.reload();
