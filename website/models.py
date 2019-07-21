@@ -31,7 +31,6 @@ class Rushee(models.Model):
 
 
 class Comment(models.Model):
-    brother = models.CharField(max_length=100)
     comment = models.TextField(max_length=300)
     rushee = models.ForeignKey(Rushee, on_delete=models.CASCADE)
 

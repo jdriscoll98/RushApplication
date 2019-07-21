@@ -41,8 +41,43 @@
         </div>
 
     </div>
+</div>
 
 </div>
+
+
+<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="comments" name="comments">
+          <input type="text" id="pk" name="pk" value="{{ rushee.pk }}">
+          {% csrf_token %}
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <label>Comments?</label>
+          <input type="text" id="comment" name="comment"></input>
+        </div>
+
+        <div class="md-form mb-4">
+          <label>Passed to who?</label>
+          <input type="text" id="new-brother" name="new-brother"></input>
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-default modal-submit">Submit</button>
+      </div>
+      </form>
+      </div>
+  </div>
+</div>
+
 
 {% endblock contents %}
 
@@ -72,7 +107,9 @@ $('.vote').on('click', function() {
       if (data.success){
           let id = 'score-'  + pk
       document.getElementById(id).innerHTML = data['score'];
+      $('#modalLoginForm').modal('toggle');
     }
+
     else {
       location.reload();
     }
@@ -80,6 +117,24 @@ $('.vote').on('click', function() {
   });
 });
 
+$('.modal-submit').on("click", function() {
+    let comment = $('input#comment').val();
+    let new_brother = $('input#new-brother').val();
+    let pk = $('input#pk').val();
+    console.log(pk);
+    $.ajax({
+        url: "{% url 'website:post_vote' %}",
+        type: "POST",
+        data: {
+            'comment': comment,
+            'new_brother': new_brother,
+            'pk': pk,
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function(data) {
+        }
+    })
+})
 
 </script>
 

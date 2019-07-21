@@ -98,6 +98,28 @@ class AddComment(CreateView):
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
+class PostVoteView(View):
+    def post(self, *args, **kwagrs):
+        data = {
+            'success': False
+        }
+        try:
+            print(self.request.POST.get('pk'))
+            rushee = Rushee.objects.get(pk=self.request.POST.get('pk'))
+            comment = self.request.POST.get('comment')
+            new_brother = self.request.POST.get('new-brother')
+            self.request.POST.get('')
+            if comment:
+                new_comment = Comment(comment=comment, rushee=rushee)
+                new_comment.save()
+            rushee.currently_talking_to = new_brother
+            rushee.save()
+        except Exception as e:
+            print(str(e))
+            messages.error(self.request, 'Error: ' + str(e))
+        return JsonResponse(data)
+
+
 
 class Vote(View):
     def post(self, *args, **kwargs):
@@ -127,5 +149,5 @@ class AccessCode(FormView):
     success_url = reverse_lazy('website:home_page')
 
     def form_valid(self, form):
-        self.request.session['access'] = True
+        self.request.session['access'] = form.data['code']
         return super().form_valid(form)

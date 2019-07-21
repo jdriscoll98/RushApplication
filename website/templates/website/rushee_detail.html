@@ -41,14 +41,19 @@ td:nth-of-type(2):before { content: "Grade: "; }
 td:nth-of-type(3):before { content: "Phone Number: "; }
 
 }
+table {
+    background-color: white;
+}
+
 </style>
 {% endblock custom_css %}
 {% block contents %}
 {% include 'website/nav_bar.html' %}
 <div class="container">
     <div class="row">
+        <h1 class="header">Rushee Detail</h1>
         <div class="col-md-8 offset-md-2">
-            <table class="table">
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Name</th>
