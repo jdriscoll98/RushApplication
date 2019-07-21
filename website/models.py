@@ -40,3 +40,7 @@ class Comment(models.Model):
 
     def get_absolute_url(self):
         return reverse("website:rushee_detail", kwargs={'pk': self.rushee.pk})
+
+
+class Code(models.Model):
+    code = models.IntegerField()

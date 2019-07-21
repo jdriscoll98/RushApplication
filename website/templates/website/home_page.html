@@ -26,7 +26,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for rushee in rushees %}
+                    {% for rushee in rushees|dictsortreversed:"total_score" %}
                     <tr>
                         <td><text class="detail" href="{% url 'website:rushee_detail' pk=rushee.pk %}">{{ rushee.name }}</text></td>
                         <td id='score-{{ rushee.pk }}'>{{ rushee.total_score }}</td>

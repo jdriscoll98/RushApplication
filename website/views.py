@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView , FormView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
@@ -8,20 +8,21 @@ from django.shortcuts import HttpResponseRedirect
 from django.http import JsonResponse
 from django.views.generic import View
 from django.contrib import messages
+from .mixins import AccessCodeRequired
 
+from .forms import CodeForm
 from .models import Rushee, Comment
-
 
 # Application Views
 
 
 # Home Page
-class HomePageView(TemplateView):
+class HomePageView(AccessCodeRequired, TemplateView):
     template_name = "website/home_page.html"
 
     def get_context_data(self, *args, **kwargs):
         context = {
-            'rushees': Rushee.objects.filter(status="FIRST").order_by('total_score')
+            'rushees': Rushee.objects.filter(status="FIRST")
         }
         return context
 
@@ -107,10 +108,24 @@ class Vote(View):
             try:
                 rushee = Rushee.objects.get(pk=self.request.POST.get('pk'))
                 vote = int(self.request.POST.get('vote'))
-                rushee.total_score += vote
-                rushee.save()
-                data['success'] = True
-                data['score'] = rushee.total_score
+                try:
+                    self.request.session[rushee.name]
+                except KeyError:
+                    rushee.total_score += vote
+                    rushee.save()
+                    data['success'] = True
+                    self.request.session[rushee.name] = 'voted'
+                    data['score'] = rushee.total_score
             except Exception as e:
                 messages.error(self.request, 'Unable to vote on rushee at this time')
             return JsonResponse(data)
+
+
+class AccessCode(FormView):
+    template_name = 'website/code.html'
+    form_class = CodeForm
+    success_url = reverse_lazy('website:home_page')
+
+    def form_valid(self, form):
+        self.request.session['access'] = True
+        return super().form_valid(form)
