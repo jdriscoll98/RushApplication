@@ -27,7 +27,7 @@ class HomePageView(AccessCodeRequired, TemplateView):
         return context
 
 
-class SecondRoundView(TemplateView):
+class SecondRoundView(LoginRequiredMixin, TemplateView):
     template_name = 'website/second_round.html'
 
     def get_context_data(self, *args, **kwargs):
@@ -37,7 +37,7 @@ class SecondRoundView(TemplateView):
         return context
 
 
-class BidView(TemplateView):
+class BidView(LoginRequiredMixin, TemplateView):
     template_name = 'website/bids.html'
 
     def get_context_data(self, *args, **kwargs):
@@ -57,16 +57,9 @@ class CreateRushee(SuccessMessageMixin, CreateView):
     success_message = 'Thank you for registering!'
 
 
-class UpdateRusheeStatus(UpdateView):
+class UpdateRusheeStatus(LoginRequiredMixin, UpdateView):
     model = Rushee
     fields = ['status']
-    template_name = 'website/change_status.html'
-    success_url = reverse_lazy("website:home_page")
-
-
-class UpdateRusheeScore(UpdateView):
-    model = Rushee
-    fields = ['total_score']
     template_name = 'website/change_status.html'
     success_url = reverse_lazy("website:home_page")
 

@@ -26,7 +26,7 @@
                 <tbody>
                     {% for rushee in rushees %}
                     <tr>
-                        <td><a href="{% url 'website:rushee_detail' pk=rushee.pk %}">{{ rushee.name }}</a></td>
+                        <td><strong href="{% url 'website:rushee_detail' pk=rushee.pk %}">{{ rushee.name }}</strong></td>
                         <td>{{ rushee.currently_talking_to|default:"No room" }}</td>
                     </tr>
                     {% endfor %}
@@ -40,3 +40,7 @@
 </div>
 
 {% endblock contents %}
+
+{% block js %}
+
+{% endblock js %}

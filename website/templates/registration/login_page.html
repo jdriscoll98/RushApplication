@@ -18,24 +18,32 @@
 </style>
 <!-- end-recaptcha -->
 
-<p class="lead">Login form</p>
+<div class="container">
+    <div class="row">
+        <h1 class="header">Pi Lambda Phi Rush</h1>
+        <div class="col-md-8 offset-md-3">
+            {% if form.errors %}
+            <p class="lead">Your username and password didn't match. Please try again.</p>
+            {% endif %}
 
-{% if form.errors %}
-<p class="lead">Your username and password didn't match. Please try again.</p>
-{% endif %}
+            <form id="recaptcha-form" method="post">
+            	{% csrf_token %}
+            	<p class="lead">
+            		{{ form.username.label_tag }}
+            		{{ form.username }}
+            	</p>
+            	<p class="lead">
+            		{{ form.password.label_tag }}
+            		{{ form.password }}
+            	</p>
+            	<input type="hidden" name="next" value="{{ next }}" />
+            	<button class="btn btn-primary g-recaptcha" data-sitekey="{{ recaptcha_site_key }}" data-callback='onSubmit'>Login</button>
+            </form>
 
-<form id="recaptcha-form" method="post">
-	{% csrf_token %}
-	<p class="lead">
-		{{ form.username.label_tag }}
-		{{ form.username }}
-	</p>
-	<p class="lead">
-		{{ form.password.label_tag }}
-		{{ form.password }}
-	</p>
-	<input type="hidden" name="next" value="{{ next }}" />
-	<button class="btn btn-primary g-recaptcha" data-sitekey="{{ recaptcha_site_key }}" data-callback='onSubmit'>Login</button>
-</form>
+        </div>
+
+    </div>
+
+</div>
 
 {% endblock contents %}
