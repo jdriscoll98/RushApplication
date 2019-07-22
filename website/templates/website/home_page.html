@@ -46,7 +46,7 @@
 </div>
 
 
-<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade" id="modalLoginForm" value="" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -56,11 +56,11 @@
         </button>
       </div>
       <form class="comments" name="comments">
-          <input type="text" id="pk" name="pk" value="{{ rushee.pk }}">
+          <input type="hidden" id="pk" name="pk">
           {% csrf_token %}
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
-          <label>Comments?</label>
+          <label>Add a comment</label>
           <input type="text" id="comment" name="comment"></input>
         </div>
 
@@ -107,11 +107,11 @@ $('.vote').on('click', function() {
       if (data.success){
           let id = 'score-'  + pk
       document.getElementById(id).innerHTML = data['score'];
+      $('input#pk').val(pk);
       $('#modalLoginForm').modal('toggle');
     }
 
     else {
-      location.reload();
     }
     }
   });
@@ -122,6 +122,8 @@ $('.modal-submit').on("click", function() {
     let new_brother = $('input#new-brother').val();
     let pk = $('input#pk').val();
     console.log(pk);
+    console.log(new_brother);
+    console.log(comment);
     $.ajax({
         url: "{% url 'website:post_vote' %}",
         type: "POST",
@@ -133,8 +135,8 @@ $('.modal-submit').on("click", function() {
         },
         success: function(data) {
         }
-    })
-})
+    });
+});
 
 </script>
 

@@ -107,8 +107,7 @@ class PostVoteView(View):
             print(self.request.POST.get('pk'))
             rushee = Rushee.objects.get(pk=self.request.POST.get('pk'))
             comment = self.request.POST.get('comment')
-            new_brother = self.request.POST.get('new-brother')
-            self.request.POST.get('')
+            new_brother = self.request.POST.get('new_brother')
             if comment:
                 new_comment = Comment(comment=comment, rushee=rushee)
                 new_comment.save()
@@ -118,7 +117,6 @@ class PostVoteView(View):
             print(str(e))
             messages.error(self.request, 'Error: ' + str(e))
         return JsonResponse(data)
-
 
 
 class Vote(View):
@@ -131,6 +129,7 @@ class Vote(View):
                 rushee = Rushee.objects.get(pk=self.request.POST.get('pk'))
                 vote = int(self.request.POST.get('vote'))
                 try:
+                    # try to get a session variable for this rushee
                     self.request.session[rushee.name]
                 except KeyError:
                     rushee.total_score += vote
