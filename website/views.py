@@ -97,7 +97,6 @@ class PostVoteView(View):
             'success': False
         }
         try:
-            print(self.request.POST.get('pk'))
             rushee = Rushee.objects.get(pk=self.request.POST.get('pk'))
             comment = self.request.POST.get('comment')
             new_brother = self.request.POST.get('new_brother')
@@ -121,14 +120,11 @@ class Vote(View):
             try:
                 rushee = Rushee.objects.get(pk=self.request.POST.get('pk'))
                 vote = int(self.request.POST.get('vote'))
-                try:
-                    # try to get a session variable for this rushee
-                    self.request.session[rushee.name]
-                except KeyError:
+                if not self.request.session.get(rushee.name, False):
                     rushee.total_score += vote
                     rushee.save()
                     data['success'] = True
-                    self.request.session[rushee.name] = 'voted'
+                    self.request.session[rushee.name] = True
                     data['score'] = rushee.total_score
             except Exception as e:
                 messages.error(self.request, 'Unable to vote on rushee at this time')
