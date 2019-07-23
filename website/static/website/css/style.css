@@ -4,7 +4,7 @@ body {
 	text-align: center;
 	font-family: sans-serif;
 	width: 100%;
-    background-color: #800080
+    background-image: url('/static/website/images/rushbackground.jpg');
 }
 
 /*
@@ -15,6 +15,7 @@ table {
   border-collapse: collapse;
   overflow: hidden;
 }
+
 /* th {
   background: #333;
   color: white;
@@ -30,6 +31,8 @@ td, th {
     margin: auto;
     padding-bottom: 25px;
     padding-top: 25px;
+    font-family: 'fantasy';
+    font-weight: bold;
 }
 .btn-primary {
     background-color: #FFFF00;
@@ -77,7 +80,12 @@ input {
   border: 2px solid black;
   background-color: white;
   padding: 20px;
-  width: 75%;
+  width: 100%;
+  background-color: #F5F5F5;
+}
+
+#id_grade {
+    width: 100%;
 }
 
 /* ----------- */
