@@ -141,3 +141,20 @@ class AccessCode(FormView):
     def form_valid(self, form):
         self.request.session['access'] = form.data['code']
         return super().form_valid(form)
+
+
+class UpdateRoomNumber(View):
+    def post(self, *args, **kwargs):
+        if self.request.is_ajax:
+            print(self.request.POST)
+            data = {
+                'success': False
+            }
+            try:
+                rushee = Rushee.objects.get(pk=self.request.POST.get('pk'))
+                rushee.upstairs_room = self.request.POST.get('number')
+                rushee.save()
+                data['success'] = True
+            except Exception as e:
+                pass
+            return JsonResponse(data)

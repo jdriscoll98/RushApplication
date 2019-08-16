@@ -24,6 +24,7 @@ class Rushee(models.Model):
     grade = models.CharField(max_length=100, choices=GRADES)
     phone_number = models.IntegerField()
     currently_talking_to = models.CharField(max_length=100, blank=True, null=True)
+    upstairs_room = models.IntegerField(blank=True, null=True)
     total_score = models.IntegerField(default=0)
     status = models.CharField(max_length=10, choices=STATUS, default='FIRST')
 

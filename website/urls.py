@@ -19,4 +19,5 @@ urlpatterns = [
     url(r"^vote/$", Vote.as_view(), name="vote"),
     url(r"^enter-code/$", AccessCode.as_view(), name="enter_code"),
     url(r"^post-vote/$", PostVoteView.as_view(), name="post_vote"),
+    url(r"^update-room/$", UpdateRoomNumber.as_view(), name="update_room_number"),
 ]

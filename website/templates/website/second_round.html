@@ -27,7 +27,7 @@
                     {% for rushee in rushees %}
                     <tr>
                         <td><a href="{% url 'website:rushee_detail' pk=rushee.pk %}">{{ rushee.name }}</a></td>
-                        <td>{{ rushee.currently_talking_to|default:"No room" }}</td>
+                        <td id="room_number">{{ rushee.upstairs_room|default:"No room" }} <i class="fa fa-edit" id="{{ rushee.pk }}"></i></td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -39,8 +39,57 @@
 
 </div>
 
+<div class="modal fade" id="modalRoomForm" value="" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+          <h3> What Room? </h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="comments" name="comments">
+          <input type="hidden" id="pk" name="pk">
+          {% csrf_token %}
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <label>Room Number</label>
+          <input type="text" id="room_number" name="room_number"></input>
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-default modal-submit">Submit</button>
+      </div>
+      </form>
+      </div>
+  </div>
+</div>
+
 {% endblock contents %}
 
 {% block js %}
-
+<script>
+$(".fa-edit").on("click", function() {
+    window.pk = $(this).attr('id');
+    $('#modalRoomForm').modal('toggle');
+});
+$('.modal-submit').on("click", function() {
+    let pk = window.pk
+    let number = $('input#room_number').val();
+    $.ajax({
+        url: "{% url 'website:update_room_number' %}",
+        type: "POST",
+        data: {
+            'pk': pk,
+            'number': number,
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function(data) {
+            window.location.href = "{% url 'website:second_round' %}"
+        }
+    });
+});
+</script>
 {% endblock js %}
