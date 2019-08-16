@@ -4,14 +4,18 @@ body {
 	text-align: center;
 	font-family: sans-serif;
 	width: 100%;
-    background-image: url('/static/website/images/rushbackground.jpg');
+    background: #ffffff;
 }
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
 
+}
 /*
 Generic Styling, for Desktops/Laptops
 */
 table {
-  width: 100%;
+  width: 100% !important;
   border-collapse: collapse;
   overflow: hidden;
 }
@@ -27,16 +31,17 @@ td, th {
   text-align: left;
 } */
 .header {
-    color: #FFFF00;
-    margin: auto;
+
     padding-bottom: 25px;
     padding-top: 25px;
     font-family: 'fantasy';
     font-weight: bold;
+    color: rgb(78,0,142);
+
+
 }
 .btn-primary {
-    background-color: #FFFF00;
-    color: #800080
+    margin: auto;
 }
 h2 {
     background-color: var(--secondary-color);
@@ -73,7 +78,8 @@ input {
 
 .btn-primary {
     font-size: 20px;
-    width: 100%;
+    background-color: rgb(78,0,142);
+    /* width: 100%; */
 }
 .sign-up {
   border-radius: 25px;
@@ -82,10 +88,110 @@ input {
   padding: 20px;
   width: 100%;
   background-color: #F5F5F5;
+
 }
 
 #id_grade {
     width: 100%;
 }
+
+.register-photo {
+  padding: 80px 0;
+}
+
+
+
+.register-photo .image-holder {
+  display: table-cell;
+  width: auto;
+  background: url('/static/website/images/meeting.png');
+  background-size: cover;
+}
+
+.register-photo .form-container {
+  display: table;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+}
+
+.register-photo form {
+  display: table-cell;
+  width: 400px;
+  background-color: #ffffff;
+  padding: 40px 60px;
+  color: #505e6c;
+}
+
+@media (max-width:991px) {
+  .register-photo form {
+    padding: 40px;
+  }
+}
+
+.register-photo form h2 {
+  font-size: 24px;
+  line-height: 1.5;
+  margin-bottom: 30px;
+}
+
+.register-photo form .form-control{
+  background: #f7f9fc;
+  border: none;
+  border-bottom: 1px solid #dfe7f1;
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+  color: inherit;
+  text-indent: 6px;
+  height: 40px;
+}
+#id_grade #id_name #id_phone_number {
+    background: #f7f9fc;
+    border: none;
+    border-bottom: 1px solid #dfe7f1;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    color: inherit;
+    text-indent: 6px;
+    height: 40px;
+}
+
+.register-photo form .form-check {
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.register-photo form .btn-primary {
+  background: #f4476b;
+  border: none;
+  border-radius: 4px;
+  padding: 11px;
+  box-shadow: none;
+  margin-top: 35px;
+  text-shadow: none;
+  outline: none !important;
+}
+
+.register-photo form .btn-primary:hover, .register-photo form .btn-primary:active {
+  background: #eb3b60;
+}
+
+.register-photo form .btn-primary:active {
+  transform: translateY(1px);
+}
+
+.register-photo form .already {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  color: #6f7a85;
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+
 
 /* ----------- */

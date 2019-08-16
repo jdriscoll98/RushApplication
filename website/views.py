@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView , FormView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
@@ -10,7 +10,7 @@ from django.views.generic import View
 from django.contrib import messages
 from .mixins import AccessCodeRequired
 
-from .forms import CodeForm
+from .forms import CodeForm, RusheeForm
 from .models import Rushee, Comment
 
 # Application Views
@@ -51,8 +51,7 @@ class BidView(LoginRequiredMixin, TemplateView):
 
 class CreateRushee(SuccessMessageMixin, CreateView):
     template_name = 'website/sign_up.html'
-    model = Rushee
-    fields = ['name', 'phone_number', 'grade']
+    form_class = RusheeForm
     success_url = reverse_lazy('website:register')
     success_message = 'Thank you for registering!'
 
@@ -61,7 +60,9 @@ class UpdateRusheeStatus(LoginRequiredMixin, UpdateView):
     model = Rushee
     fields = ['status']
     template_name = 'website/change_status.html'
-    success_url = reverse_lazy("website:home_page")
+
+    def get_success_url(self, *args, **kwargs):
+        return reverse_lazy('website:rushee_detail', kwargs={'pk': self.object.pk})
 
 
 class DeleteRushee(DeleteView):
@@ -90,6 +91,7 @@ class AddComment(CreateView):
         self.object.rushee = rushee
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
+
 
 class PostVoteView(View):
     def post(self, *args, **kwagrs):

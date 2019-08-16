@@ -1,5 +1,5 @@
 from django import forms
-from .models import Code
+from .models import Code, Rushee
 
 
 class CodeForm(forms.Form):
@@ -13,3 +13,13 @@ class CodeForm(forms.Form):
         else:
             print("error")
             raise forms.ValidationError("Invalid Code")
+
+
+class RusheeForm(forms.ModelForm):
+    class Meta:
+        model = Rushee
+        fields = ['name', 'phone_number', 'grade']
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Name'}),
+            'phone_number': forms.TextInput(attrs={'placeholder': 'Phone Number'}),
+        }

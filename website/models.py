@@ -6,6 +6,7 @@ from django.urls import reverse
 
 class Rushee(models.Model):
     GRADES = [
+        ("", "GRADE"),
         ("FRESHMAN", "FRESHMAN"),
         ("SOPHOMORE", "SOPHOMORE"),
         ("JUNIOR", "JUNIOR"),
