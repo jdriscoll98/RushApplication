@@ -76,6 +76,7 @@ table {
                 </tbody>
             </table>
             <a style="width:100%;" href="{% url 'website:change_status' pk=rushee.pk %}" class="btn btn-primary">Change Status</a>
+            <button style="width:100%; margin-top: 5px" href="{% url 'website:delete_rushee' pk=rushee.pk %}" class="btn btn-danger" id="axe">Axe Rushee</button>
         </div>
 
     </div>
@@ -85,4 +86,20 @@ table {
 {% endblock contents %}
 
 {% block js %}
+<script>
+$('#axe').on("click", function() {
+    if (confirm("Are you sure you want to delete this rushee?")) {
+        $.ajax({
+            url: $(this).attr('href'),
+            type: "POST",
+            data: {
+                csrfmiddlewaretoken: "{{ csrf_token }}"
+            },
+            success: function() {
+                window.location.href = "{% url 'website:home_page' %}";
+            }
+        });
+    }
+})
+</script>
 {% endblock js%}

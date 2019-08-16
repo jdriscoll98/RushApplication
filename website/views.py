@@ -146,7 +146,6 @@ class AccessCode(FormView):
 class UpdateRoomNumber(View):
     def post(self, *args, **kwargs):
         if self.request.is_ajax:
-            print(self.request.POST)
             data = {
                 'success': False
             }
@@ -154,6 +153,21 @@ class UpdateRoomNumber(View):
                 rushee = Rushee.objects.get(pk=self.request.POST.get('pk'))
                 rushee.upstairs_room = self.request.POST.get('number')
                 rushee.save()
+                data['success'] = True
+            except Exception as e:
+                pass
+            return JsonResponse(data)
+
+
+class DeleteRushee(View):
+    def post(self, *args, **kwargs):
+        if self.request.is_ajax:
+            data = {
+                'success': False
+            }
+            try:
+                rushee = Rushee.objects.get(pk=self.kwargs.get('pk'))
+                rushee.delete()
                 data['success'] = True
             except Exception as e:
                 pass

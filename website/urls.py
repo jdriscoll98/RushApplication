@@ -20,4 +20,5 @@ urlpatterns = [
     url(r"^enter-code/$", AccessCode.as_view(), name="enter_code"),
     url(r"^post-vote/$", PostVoteView.as_view(), name="post_vote"),
     url(r"^update-room/$", UpdateRoomNumber.as_view(), name="update_room_number"),
+    url(r"^delete-rushee/(?P<pk>\d+)/$$", DeleteRushee.as_view(), name="delete_rushee"),
 ]
