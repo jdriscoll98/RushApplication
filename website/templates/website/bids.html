@@ -20,27 +20,35 @@
             <table class="table table-bordered">
                 <tbody>
                     <tr bgcolor="green" >
-                        <th colspan="4">Accepted</th>
+                        <th colspan="4"><button class="btn btn-link" data-toggle="collapse" data-target="#accepted" style="color:white; font-weight: bold">Accepted</button></th>
                     </tr>
                     {% for rushee in accepted %}
+                    <tbody id="accepted">
                     <tr>
                         <td><a href="{% url 'website:rushee_detail' pk=rushee.pk %}">{{ rushee.name }}</a></td>
                     </tr>
+                    </tbody>
                     {% endfor %}
                     <tr bgcolor="yellow">
-                        <th colspan="4">Holding</th>
+                        <th colspan="4"><button class="btn btn-link" data-toggle="collapse" data-target="#holding" style="color:white; font-weight: bold">Holding</button></th>
+
                     </tr>
                     {% for rushee in holding %}
+                    <tbody id="holding">
                     <tr>
                         <td>{{ rushee.name }}</td>
                     </tr>
+                    </tbody>
                     {% endfor %} <tr bgcolor="red">
-                         <th colspan="4">Rejected</th>
+                        <th colspan="4"><button class="btn btn-link" data-toggle="collapse" data-target="#rejected" style="color:white; font-weight: bold">Rejected</button></th>
+
                      </tr>
                      {% for rushee in denied %}
-                     <tr>
+                     <tbody id="rejected">
+                     <tr class="denied">
                          <td>{{ rushee.name }}</td>
                      </tr>
+                     </tbody>
                      {% endfor %}
                 </tbody>
             </table>
