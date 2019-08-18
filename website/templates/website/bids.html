@@ -36,7 +36,8 @@
                     {% for rushee in holding %}
                     <tbody id="holding">
                     <tr>
-                        <td>{{ rushee.name }}</td>
+                        <td><a href="{% url 'website:rushee_detail' pk=rushee.pk %}">{{ rushee.name }}</a></td>
+
                     </tr>
                     </tbody>
                     {% endfor %} <tr bgcolor="red">
@@ -46,7 +47,8 @@
                      {% for rushee in denied %}
                      <tbody id="rejected">
                      <tr class="denied">
-                         <td>{{ rushee.name }}</td>
+                         <td><a href="{% url 'website:rushee_detail' pk=rushee.pk %}">{{ rushee.name }}</a></td>
+
                      </tr>
                      </tbody>
                      {% endfor %}

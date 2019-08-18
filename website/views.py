@@ -65,10 +65,6 @@ class UpdateRusheeStatus(LoginRequiredMixin, UpdateView):
         return reverse_lazy('website:rushee_detail', kwargs={'pk': self.object.pk})
 
 
-class DeleteRushee(DeleteView):
-    model = Rushee
-
-
 class ViewRushee(DetailView):
     template_name = 'website/rushee_detail.html'
     model = Rushee
@@ -143,7 +139,7 @@ class AccessCode(FormView):
         return super().form_valid(form)
 
 
-class UpdateRoomNumber(View):
+class UpdateRoomNumber(LoginRequiredMixin, View):
     def post(self, *args, **kwargs):
         if self.request.is_ajax:
             data = {
@@ -159,7 +155,7 @@ class UpdateRoomNumber(View):
             return JsonResponse(data)
 
 
-class DeleteRushee(View):
+class DeleteRushee(LoginRequiredMixin, View):
     def post(self, *args, **kwargs):
         if self.request.is_ajax:
             data = {
