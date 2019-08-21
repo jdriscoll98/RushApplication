@@ -78,7 +78,6 @@ $(".fa-edit").on("click", function() {
 $('.modal-submit').on("click", function() {
     let pk = window.pk
     let number = $('input#room_number').val();
-    setup_ajax();
     $.ajax({
         url: "{% url 'website:update_room_number' %}",
         type: "POST",

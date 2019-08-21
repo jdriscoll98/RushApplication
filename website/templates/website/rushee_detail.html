@@ -89,7 +89,6 @@ table {
 <script>
 $('#axe').on("click", function() {
     if (confirm("Are you sure you want to delete this rushee?")) {
-        setup_ajax();
         $.ajax({
             url: $(this).attr('href'),
             type: "POST",

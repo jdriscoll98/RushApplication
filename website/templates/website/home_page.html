@@ -108,7 +108,6 @@ $('.detail').on("click", function(){
 $('.vote').on('click', function() {
   let pk = $(this).attr('id')
   let vote = $(this).attr('value')
-  setup_ajax();
   $.ajax({
     url: '{% url "website:vote" %}',
     type: 'POST',
@@ -140,7 +139,6 @@ $('.modal-submit').on("click", function() {
     console.log(pk);
     console.log(new_brother);
     console.log(comment);
-    setup_ajax();
     $.ajax({
         url: "{% url 'website:post_vote' %}",
         type: "POST",
