@@ -72,6 +72,4 @@ RECAPTCHA_SITE_KEY = get_secret("RECAPTCHA_SITE_KEY")
 
 # Proxy Settings
 
-CSRF_COOKIE_DOMAIN = ".cise.ufl.edu"
-
 # 2019.06.04-DEA
